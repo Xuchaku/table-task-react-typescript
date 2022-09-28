@@ -1,0 +1,29 @@
+@import "./../../global/global.scss";
+.Table {
+  width: 100%;
+  table {
+    width: 100%;
+    font-family: $font-family-header;
+    background-color: white;
+    border-collapse: collapse;
+    border-left: 3px solid white;
+    th {
+      color: $main-bg-theme-active;
+      font-size: $font-size-default;
+      font-weight: bold;
+      padding: 20px;
+      background-color: $bg-theme-hover;
+    }
+    tr:hover {
+      transition: 0.2s;
+      cursor: pointer;
+      border-left: 3px solid $main-bg-theme-active;
+      background-color: $bg-theme-hover;
+    }
+    td {
+      text-align: center;
+      color: black;
+      padding: 20px;
+    }
+  }
+}

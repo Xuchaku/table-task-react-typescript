@@ -1,0 +1,21 @@
+@import "./../../global/global.scss";
+.Select {
+  display: flex;
+  flex-direction: column;
+  label {
+    @extend %label-style;
+  }
+  select {
+    width: 120px;
+    border-radius: 0;
+    padding: 10px 20px;
+    color: $color-font-not-active;
+    @include ui-border(2px);
+    &:focus {
+      border-color: $main-bg-theme-active;
+      color: $main-bg-theme-active;
+    }
+    option {
+    }
+  }
+}

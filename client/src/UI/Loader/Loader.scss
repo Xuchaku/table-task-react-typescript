@@ -1,0 +1,29 @@
+@import "./../../global/global.scss";
+.Loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  div {
+    width: 200px;
+    background-color: $bg-theme-hover;
+    position: absolute;
+    span {
+      display: block;
+      position: relative;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: #4b74ff;
+      animation: anim 2s infinite ease-in-out;
+      animation-direction: alternate;
+    }
+  }
+}
+@keyframes anim {
+  from {
+    left: 0;
+  }
+  to {
+    left: 150px;
+  }
+}

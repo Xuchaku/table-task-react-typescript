@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Sans Narrow";
+  src: url("./../assets/fonts/PTSansNarrow-Regular.ttf");
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./../assets/fonts/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family: "Alfa Slab One";
+  src: url("./../assets/fonts/AlfaSlabOne-Regular.ttf");
+}
+
+$font-family-header: "Sans Narrow";
+$font-family-table: "Alfa Slab One";
+$font-family-filter: "Source Sans Pro";
+
+$font-size-major: 48px;
+$font-size-default: 24px;
+$font-size-minor: 14px;
+
+$color-font-not-active: #909090;
+
+%label-style {
+  font-size: $font-size-default;
+  font-family: $font-family-filter;
+}
+$main-bg-theme-active: #4b74ff;
+$bg-theme-hover: #eff0f2;
+
+@mixin ui-border($property) {
+  border-radius: $property;
+  outline: none;
+  border: 1px solid #ccc;
+}

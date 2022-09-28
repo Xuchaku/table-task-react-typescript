@@ -1,0 +1,15 @@
+@import "./../../global/global.scss";
+.Filter {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: $font-size-default;
+
+  justify-content: flex-start;
+  & > div {
+    margin-right: 20px;
+  }
+  & > p {
+    font-family: $font-family-filter;
+  }
+}

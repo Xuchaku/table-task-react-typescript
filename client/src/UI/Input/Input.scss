@@ -1,0 +1,18 @@
+@import "./../../global/global.scss";
+.Input {
+  display: flex;
+  flex-direction: column;
+  label {
+    @extend %label-style;
+  }
+  input {
+    width: 200px;
+    @include ui-border(24px);
+    font-size: $font-size-minor;
+    padding: 10px 20px;
+  }
+  input:focus {
+    border-color: $main-bg-theme-active;
+    color: $main-bg-theme-active;
+  }
+}

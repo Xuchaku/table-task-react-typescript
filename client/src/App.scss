@@ -1,0 +1,24 @@
+@import "./global/global.scss";
+.App {
+  width: 800px;
+  height: 100vh;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  & > div {
+    margin-bottom: 20px;
+  }
+}
+h1 {
+  font-family: $font-family-header;
+  font-size: $font-size-major;
+  width: 100%;
+  margin-bottom: 20px;
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-top: 2px solid $bg-theme-hover;
+  }
+}

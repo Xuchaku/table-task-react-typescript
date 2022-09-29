@@ -26,7 +26,7 @@ function App() {
   const [actualRowsLength, setActualRowsLength] = useState(rows.length);
   //используем кастомный хук для определения текущей страницы, общего числа страницы, левую и правую границы среза массива строк
   const { currentPage, totalPage, lastIndex, firstIndex, prev, next, setPage } =
-    usePagination(ROW_IN_PAGE, actualRowsLength);
+    usePagination(10, actualRowsLength);
 
   //высчитываем на основе пользовательского ввода, текущей страницы, отфильтрованный массив строк
   const currentRows: RowType[] = useMemo(() => {
@@ -44,9 +44,9 @@ function App() {
     actualRowsLength,
     firstIndex,
     lastIndex,
-    actualRowsLength,
-    currentPage,
+    setActualRowsLength,
   ]);
+  console.log(currentRows.length);
   //функция загрузки данных на сервер !!!(не на стороне клиента)
   function wrapperGetDataOnServer() {
     generateDataOnServer(GENERATE_DATA_URL, 20, setIsError);

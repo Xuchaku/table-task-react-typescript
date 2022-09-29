@@ -16,15 +16,13 @@ const calculateRows = (
     switch (filter.field) {
       case "title": {
         if (filter.operator == "in") {
-          const actualRows = rows
-            .filter((row) => {
-              return row.title
-                .toLowerCase()
-                .includes(filter.query.toString().toLowerCase());
-            })
-            .slice(firstIndex, lastIndex);
+          const actualRows = rows.filter((row) => {
+            return row.title
+              .toLowerCase()
+              .includes(filter.query.toString().toLowerCase());
+          });
           setActualRowsLength(actualRows.length);
-          return actualRows;
+          return actualRows.slice(firstIndex, lastIndex);
         } else {
           setActualRowsLength(rows.length);
           return rows.slice(firstIndex, lastIndex);
@@ -33,38 +31,29 @@ const calculateRows = (
       }
       default: {
         if (filter.operator == "<") {
-          const actualRows = rows
-            .filter((row) => {
-              return (
-                Number(row[filter.field as keyof RowType]) <
-                Number(filter.query)
-              );
-            })
-            .slice(firstIndex, lastIndex);
+          const actualRows = rows.filter((row) => {
+            return (
+              Number(row[filter.field as keyof RowType]) < Number(filter.query)
+            );
+          });
           setActualRowsLength(actualRows.length);
-          return actualRows;
+          return actualRows.slice(firstIndex, lastIndex);
         } else if (filter.operator == ">") {
-          const actualRows = rows
-            .filter((row) => {
-              return (
-                Number(row[filter.field as keyof RowType]) >
-                Number(filter.query)
-              );
-            })
-            .slice(firstIndex, lastIndex);
+          const actualRows = rows.filter((row) => {
+            return (
+              Number(row[filter.field as keyof RowType]) > Number(filter.query)
+            );
+          });
           setActualRowsLength(actualRows.length);
-          return actualRows;
+          return actualRows.slice(firstIndex, lastIndex);
         } else if (filter.operator == "=") {
-          const actualRows = rows
-            .filter((row) => {
-              return (
-                Number(row[filter.field as keyof RowType]) ==
-                Number(filter.query)
-              );
-            })
-            .slice(firstIndex, lastIndex);
+          const actualRows = rows.filter((row) => {
+            return (
+              Number(row[filter.field as keyof RowType]) == Number(filter.query)
+            );
+          });
           setActualRowsLength(actualRows.length);
-          return actualRows;
+          return actualRows.slice(firstIndex, lastIndex);
         } else {
           setActualRowsLength(rows.length);
           return rows.slice(firstIndex, lastIndex);

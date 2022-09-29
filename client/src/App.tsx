@@ -7,7 +7,7 @@ import Pagination from "./components/Pagination/Pagination";
 import FilterType from "./types/FilterType";
 import RowType from "./types/RowType";
 import useFetching from "./hooks/useFetching";
-import { POINT_SERVER } from "./constants";
+import { POINT_SERVER, ROW_IN_PAGE } from "./constants";
 import ErrorTip from "./UI/ErrorTip/ErrorTip";
 import Loader from "./UI/Loader/Loader";
 import usePagination from "./hooks/usePagination";
@@ -19,12 +19,10 @@ function App() {
     operator: "",
     query: "",
   });
-
   const { rows, isLoading, isError } = useFetching(POINT_SERVER);
   const [actualRowsLength, setActualRowsLength] = useState(rows.length);
-
   const { currentPage, totalPage, lastIndex, firstIndex, prev, next, setPage } =
-    usePagination(5, actualRowsLength);
+    usePagination(ROW_IN_PAGE, actualRowsLength);
 
   const currentRows: RowType[] = useMemo(() => {
     return calculateRows(
@@ -48,7 +46,13 @@ function App() {
   return (
     <div className="App">
       <h1>Приложение - Таблица</h1>
-      <Filter filter={filter} setFilter={setFilter} />
+      <Filter
+        start={firstIndex}
+        finish={lastIndex}
+        totalLength={actualRowsLength}
+        filter={filter}
+        setFilter={setFilter}
+      />
       {isLoading ? <Loader /> : <Table rows={currentRows} />}
       <Pagination
         setPage={setPage}

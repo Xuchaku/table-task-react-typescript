@@ -2,9 +2,17 @@
 .Filter {
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 100%;
   font-size: $font-size-default;
-
+  p {
+    margin-left: auto;
+    color: $color-font-not-active;
+    font-size: $font-size-minor;
+    span {
+      color: rgb(22, 2, 2);
+    }
+  }
   justify-content: flex-start;
   & > div {
     margin-right: 20px;

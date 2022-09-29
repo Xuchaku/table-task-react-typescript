@@ -74,4 +74,5 @@ const calculateRows = (
     }
   }
 };
+
 export default calculateRows;

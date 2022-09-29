@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import "./Pagination.scss";
+
 type PaginationProps = {
   currentPage: number;
   totalPage: number;
@@ -17,19 +18,31 @@ const Pagination: FC<PaginationProps> = ({
   const arrNum = Array.from({ length: totalPage }, (x, i) => ++i);
   return (
     <div className="Pagination">
-      <span onClick={prev}>&lt;</span>
+      <span onClick={prev}></span>
       <div>
-        {arrNum.map((page) => {
+        {arrNum.map((page, key) => {
           if (currentPage - page == 1)
-            return <span onClick={setPage.bind(null, page)}>{page}</span>;
+            return (
+              <span key={key} onClick={setPage.bind(null, page)}>
+                {page}
+              </span>
+            );
           if (currentPage == page) {
-            return <span className="active">{currentPage}</span>;
+            return (
+              <span key={key} className="active">
+                {currentPage}
+              </span>
+            );
           }
           if (page - currentPage == 1)
-            return <span onClick={setPage.bind(null, page)}>{page}</span>;
+            return (
+              <span key={key} onClick={setPage.bind(null, page)}>
+                {page}
+              </span>
+            );
         })}
       </div>
-      <span onClick={next}>&gt;</span>
+      <span onClick={next}></span>
     </div>
   );
 };

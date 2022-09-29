@@ -12,3 +12,4 @@ export const SECOND_SELECT_VALUES: SelectValue[] = [
   { value: "<", text: "Меньше" },
   { value: "in", text: "Содержит" },
 ];
+export const ROW_IN_PAGE = 10;

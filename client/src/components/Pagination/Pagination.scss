@@ -11,9 +11,16 @@
     cursor: pointer;
   }
   & > span:first-child {
+    background-image: url("./../../assets/svg/left-arrow-back-svgrepo-com.svg");
+    width: 30px;
+    height: 30px;
     left: 0;
   }
   & > span:last-child {
+    background-image: url("./../../assets/svg/left-arrow-back-svgrepo-com.svg");
+    width: 30px;
+    height: 30px;
+    transform: rotate(180deg);
     right: 0;
   }
   div {
@@ -22,7 +29,11 @@
       font-family: $font-family-header;
       color: $color-font-not-active;
       margin: 0 10px;
+      transition: 0.3s;
       cursor: pointer;
+    }
+    span:hover {
+      color: $main-bg-theme-active;
     }
     span.active {
       color: $main-bg-theme-active;

@@ -1,14 +1,25 @@
-import React from "react";
+import React, { ChangeEvent, FC } from "react";
+import SelectValue from "../../types/SelectValue";
 import "./Select.scss";
-const Select = () => {
+type SelectProps = {
+  options: SelectValue[];
+  defaultValue: SelectValue;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+};
+const Select: FC<SelectProps> = ({ options, defaultValue, onChange }) => {
   return (
     <div className="Select">
-      <select defaultValue={"1"}>
-        <option value="1" disabled>
-          Пункт 1
+      <select defaultValue={defaultValue.value} onChange={onChange}>
+        <option value={defaultValue.value} disabled>
+          {defaultValue.text}
         </option>
-        <option value="2">Пункт 1</option>
-        <option value="3">Пункт 2</option>
+        {options.map((option, key) => {
+          return (
+            <option key={key} value={option.value}>
+              {option.text}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

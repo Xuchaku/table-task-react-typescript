@@ -14,20 +14,65 @@ import Loader from "./UI/Loader/Loader";
 function App() {
   const [filter, setFilter] = useState<FilterType>({
     field: "",
-    operator: "=",
+    operator: "",
     query: "",
   });
   const [page, setPage] = useState<number>(1);
   const { rows, isLoading, isError } = useFetching(POINT_SERVER);
 
   const currentRows: RowType[] = useMemo(() => {
-    return rows;
+    if (!filter.field || !filter.operator || !filter.query) {
+      return rows;
+    } else {
+      switch (filter.field) {
+        case "title": {
+          if (filter.operator == "in") {
+            return rows.filter((row) => {
+              return row.title
+                .toLowerCase()
+                .includes(filter.query.toString().toLowerCase());
+            });
+          } else {
+            return rows;
+          }
+          break;
+        }
+        default: {
+          if (filter.operator == "<") {
+            return rows.filter((row) => {
+              return (
+                Number(row[filter.field as keyof RowType]) <
+                Number(filter.query)
+              );
+            });
+          } else if (filter.operator == ">") {
+            return rows.filter((row) => {
+              return (
+                Number(row[filter.field as keyof RowType]) >
+                Number(filter.query)
+              );
+            });
+          } else if (filter.operator == "=") {
+            return rows.filter((row) => {
+              return (
+                Number(row[filter.field as keyof RowType]) ==
+                Number(filter.query)
+              );
+            });
+          } else {
+            return rows;
+          }
+          return rows;
+          break;
+        }
+      }
+    }
   }, [page, filter, rows]);
 
   return (
     <div className="App">
       <h1>Приложение - Таблица</h1>
-      <Filter filter={filter} />
+      <Filter filter={filter} setFilter={setFilter} />
       {isLoading ? <Loader /> : <Table rows={currentRows} />}
       <Pagination currentPage={page} />
       {isError && <ErrorTip />}

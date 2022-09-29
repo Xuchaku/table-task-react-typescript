@@ -1,9 +1,18 @@
-import React from "react";
+import React, { ChangeEvent, FC } from "react";
 import "./Input.scss";
-const Input = () => {
+type InputProps = {
+  value: string | number;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+const Input: FC<InputProps> = ({ value, onChange }) => {
   return (
     <div className="Input">
-      <input type="text" placeholder="Поиск..." />
+      <input
+        onChange={onChange}
+        type="text"
+        value={value}
+        placeholder="Поиск..."
+      />
     </div>
   );
 };

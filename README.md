@@ -1,6 +1,6 @@
 # Приложение Таблица
 
-Используются typescript, scss, expreed, nodejs, postgresql
+Используются typescript, scss, expreed, nodejs, postgresql.
 Требуется файл .env для установки переменынх окружения
 
 > PORT_APP
@@ -8,6 +8,7 @@
 > PG_DB_NAME
 > PG_PORT
 > PG_TABLE_NAME
+> А также сам postgresql.
 
 ## Дополнения 1
 

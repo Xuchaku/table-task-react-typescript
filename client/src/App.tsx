@@ -27,26 +27,30 @@ function App() {
 
   const currentRows: RowType[] = useMemo(() => {
     if (!filter.field || !filter.operator || !filter.query) {
+      setActualRowsLength(rows.length);
       return rows.slice(firstIndex, lastIndex);
     } else {
       switch (filter.field) {
         case "title": {
           if (filter.operator == "in") {
-            return rows
+            const actualRows = rows
               .filter((row) => {
                 return row.title
                   .toLowerCase()
                   .includes(filter.query.toString().toLowerCase());
               })
               .slice(firstIndex, lastIndex);
+            setActualRowsLength(actualRows.length);
+            return actualRows;
           } else {
+            setActualRowsLength(rows.length);
             return rows.slice(firstIndex, lastIndex);
           }
           break;
         }
         default: {
           if (filter.operator == "<") {
-            return rows
+            const actualRows = rows
               .filter((row) => {
                 return (
                   Number(row[filter.field as keyof RowType]) <
@@ -54,8 +58,10 @@ function App() {
                 );
               })
               .slice(firstIndex, lastIndex);
+            setActualRowsLength(actualRows.length);
+            return actualRows;
           } else if (filter.operator == ">") {
-            return rows
+            const actualRows = rows
               .filter((row) => {
                 return (
                   Number(row[filter.field as keyof RowType]) >
@@ -63,8 +69,10 @@ function App() {
                 );
               })
               .slice(firstIndex, lastIndex);
+            setActualRowsLength(actualRows.length);
+            return actualRows;
           } else if (filter.operator == "=") {
-            return rows
+            const actualRows = rows
               .filter((row) => {
                 return (
                   Number(row[filter.field as keyof RowType]) ==
@@ -72,7 +80,10 @@ function App() {
                 );
               })
               .slice(firstIndex, lastIndex);
+            setActualRowsLength(actualRows.length);
+            return actualRows;
           } else {
+            setActualRowsLength(rows.length);
             return rows.slice(firstIndex, lastIndex);
           }
           return rows;

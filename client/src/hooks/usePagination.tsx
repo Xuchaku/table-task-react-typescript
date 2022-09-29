@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const usePagination = (rowInOnePage: number, totalRow: number) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = Math.ceil(totalRow / rowInOnePage);
+  const totalPage = useMemo(() => {
+    setCurrentPage(1);
+    return Math.ceil(totalRow / rowInOnePage);
+  }, [totalRow, rowInOnePage]);
   const lastIndex = currentPage * rowInOnePage;
   const firstIndex = lastIndex - rowInOnePage;
   function prev() {

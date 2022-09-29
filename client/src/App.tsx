@@ -7,7 +7,7 @@ import Pagination from "./components/Pagination/Pagination";
 import FilterType from "./types/FilterType";
 import RowType from "./types/RowType";
 import useFetching from "./hooks/useFetching";
-import { POINT_SERVER, ROW_IN_PAGE } from "./constants";
+import { GET_DATA_URL, ROW_IN_PAGE } from "./constants";
 import ErrorTip from "./UI/ErrorTip/ErrorTip";
 import Loader from "./UI/Loader/Loader";
 import usePagination from "./hooks/usePagination";
@@ -19,7 +19,7 @@ function App() {
     operator: "",
     query: "",
   });
-  const { rows, isLoading, isError } = useFetching(POINT_SERVER);
+  const { rows, isLoading, isError } = useFetching(GET_DATA_URL);
   const [actualRowsLength, setActualRowsLength] = useState(rows.length);
   const { currentPage, totalPage, lastIndex, firstIndex, prev, next, setPage } =
     usePagination(ROW_IN_PAGE, actualRowsLength);

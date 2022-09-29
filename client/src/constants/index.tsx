@@ -1,6 +1,5 @@
 import SelectValue from "../types/SelectValue";
 
-export const POINT_SERVER = "http://localhost:8000";
 export const FIRST_SELECT_VALUES: SelectValue[] = [
   { value: "title", text: "Название" },
   { value: "value", text: "Количество" },
@@ -13,3 +12,5 @@ export const SECOND_SELECT_VALUES: SelectValue[] = [
   { value: "in", text: "Содержит" },
 ];
 export const ROW_IN_PAGE = 10;
+export const GENERATE_DATA_URL = "http://localhost:8000/generate/";
+export const GET_DATA_URL = "http://localhost:8000/getdata";

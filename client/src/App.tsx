@@ -10,6 +10,7 @@ import useFetching from "./hooks/useFetching";
 import { POINT_SERVER } from "./constants";
 import ErrorTip from "./UI/ErrorTip/ErrorTip";
 import Loader from "./UI/Loader/Loader";
+import usePagination from "./hooks/usePagination";
 
 function App() {
   const [filter, setFilter] = useState<FilterType>({
@@ -17,64 +18,82 @@ function App() {
     operator: "",
     query: "",
   });
-  const [page, setPage] = useState<number>(1);
+
   const { rows, isLoading, isError } = useFetching(POINT_SERVER);
+  const [actualRowsLength, setActualRowsLength] = useState(rows.length);
+
+  const { currentPage, totalPage, lastIndex, firstIndex, prev, next, setPage } =
+    usePagination(5, actualRowsLength);
 
   const currentRows: RowType[] = useMemo(() => {
     if (!filter.field || !filter.operator || !filter.query) {
-      return rows;
+      return rows.slice(firstIndex, lastIndex);
     } else {
       switch (filter.field) {
         case "title": {
           if (filter.operator == "in") {
-            return rows.filter((row) => {
-              return row.title
-                .toLowerCase()
-                .includes(filter.query.toString().toLowerCase());
-            });
+            return rows
+              .filter((row) => {
+                return row.title
+                  .toLowerCase()
+                  .includes(filter.query.toString().toLowerCase());
+              })
+              .slice(firstIndex, lastIndex);
           } else {
-            return rows;
+            return rows.slice(firstIndex, lastIndex);
           }
           break;
         }
         default: {
           if (filter.operator == "<") {
-            return rows.filter((row) => {
-              return (
-                Number(row[filter.field as keyof RowType]) <
-                Number(filter.query)
-              );
-            });
+            return rows
+              .filter((row) => {
+                return (
+                  Number(row[filter.field as keyof RowType]) <
+                  Number(filter.query)
+                );
+              })
+              .slice(firstIndex, lastIndex);
           } else if (filter.operator == ">") {
-            return rows.filter((row) => {
-              return (
-                Number(row[filter.field as keyof RowType]) >
-                Number(filter.query)
-              );
-            });
+            return rows
+              .filter((row) => {
+                return (
+                  Number(row[filter.field as keyof RowType]) >
+                  Number(filter.query)
+                );
+              })
+              .slice(firstIndex, lastIndex);
           } else if (filter.operator == "=") {
-            return rows.filter((row) => {
-              return (
-                Number(row[filter.field as keyof RowType]) ==
-                Number(filter.query)
-              );
-            });
+            return rows
+              .filter((row) => {
+                return (
+                  Number(row[filter.field as keyof RowType]) ==
+                  Number(filter.query)
+                );
+              })
+              .slice(firstIndex, lastIndex);
           } else {
-            return rows;
+            return rows.slice(firstIndex, lastIndex);
           }
           return rows;
           break;
         }
       }
     }
-  }, [page, filter, rows]);
+  }, [currentPage, filter, rows, actualRowsLength]);
 
   return (
     <div className="App">
       <h1>Приложение - Таблица</h1>
       <Filter filter={filter} setFilter={setFilter} />
       {isLoading ? <Loader /> : <Table rows={currentRows} />}
-      <Pagination currentPage={page} />
+      <Pagination
+        setPage={setPage}
+        currentPage={currentPage}
+        totalPage={totalPage}
+        prev={prev}
+        next={next}
+      />
       {isError && <ErrorTip />}
     </div>
   );

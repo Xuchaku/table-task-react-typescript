@@ -1,4 +1,31 @@
+@import "./../../global/global.scss";
 .Pagination {
   width: 100%;
   text-align: center;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  & > span {
+    position: absolute;
+    cursor: pointer;
+  }
+  & > span:first-child {
+    left: 0;
+  }
+  & > span:last-child {
+    right: 0;
+  }
+  div {
+    span {
+      font-size: $font-size-default;
+      font-family: $font-family-header;
+      color: $color-font-not-active;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    span.active {
+      color: $main-bg-theme-active;
+    }
+  }
 }

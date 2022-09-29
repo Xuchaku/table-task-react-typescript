@@ -1,6 +1,6 @@
 import FilterType from "../types/FilterType";
 import RowType from "../types/RowType";
-
+//функция вычисления текущего отфильтврованного массива строк
 const calculateRows = (
   rows: RowType[],
   filter: FilterType,
@@ -10,7 +10,8 @@ const calculateRows = (
 ) => {
   if (!filter.field || !filter.operator || !filter.query) {
     setActualRowsLength(rows.length);
-    return rows.slice(firstIndex, lastIndex);
+    if (rows.length) return rows.slice(firstIndex, lastIndex);
+    return rows;
   } else {
     switch (filter.field) {
       case "title": {

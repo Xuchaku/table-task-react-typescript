@@ -14,6 +14,7 @@ type FilterProps = {
 };
 const Filter: FC<FilterProps> = (props) => {
   const { filter, setFilter, start, finish, totalLength } = props;
+  //высчитываем на основе выбранной первой колонки доступные операции
   const disableConfigOperationSelect = useMemo(() => {
     if (filter.field == "title") {
       const allowedOperations = ["in"];

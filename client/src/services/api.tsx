@@ -1,12 +1,11 @@
 import RowType from "../types/RowType";
-
+//класс для работы с сервером
 class Api {
   constructor() {}
   async get(url: string) {
     const response = await fetch(url);
     if (response.ok) {
       const json = (await response.json()) as RowType[];
-      console.log(json);
       return json.map((obj) => {
         return { ...obj, date: new Date(Number(obj.date)) };
       });

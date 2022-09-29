@@ -15,7 +15,12 @@ const useFetching = (url: string) => {
     try {
       setIsLoading(true);
       const data = (await api.get(url)) as RowType[];
-      setRows(data);
+      if (data instanceof Error) {
+        setRows([]);
+        throw new Error(data.message);
+      } else {
+        setRows(data);
+      }
     } catch (err) {
       setIsError(true);
       setIsLoading(false);
@@ -24,6 +29,6 @@ const useFetching = (url: string) => {
     }
   }
 
-  return { rows, isLoading, isError };
+  return { rows, isLoading, isError, setIsError };
 };
 export default useFetching;
